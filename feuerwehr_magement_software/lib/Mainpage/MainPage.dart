@@ -62,6 +62,8 @@ class _MainPageState extends State<MainPage> {
           textAlign: TextAlign.center,
         ),
       ),
+
+
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -139,8 +141,8 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
 
-      //Navigation Bar
-      //bottomNavigationBar: navigationBarWidget(onItemTapped: (int ) {  },),
+
+      bottomNavigationBar: navBar(),
 
     );
   }

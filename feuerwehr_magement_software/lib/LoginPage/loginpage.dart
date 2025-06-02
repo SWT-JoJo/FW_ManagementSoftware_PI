@@ -1,5 +1,6 @@
 import 'package:feuerwehr_magement_software/Mainpage/MainPage.dart';
 import 'package:flutter/material.dart';
+import 'package:feuerwehr_magement_software/routs.dart';
 
 class loginPage extends StatefulWidget {
   const loginPage({super.key});
@@ -140,6 +141,7 @@ class _loginPageState extends State<loginPage> {
                       context,
                       MaterialPageRoute(builder: (context) => const MainPage()),
                     );
+                    setSelectedPage(2);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,

@@ -1,5 +1,7 @@
 import 'package:feuerwehr_magement_software/LoginPage/loginpage.dart';
+import 'package:feuerwehr_magement_software/Mainpage/MainPage.dart';
 import 'package:feuerwehr_magement_software/Theme.dart';
+import 'package:feuerwehr_magement_software/routs.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -13,9 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-
-
-      home: loginPage(),
+      routes: pagerouts,
+      home: const loginPage(),
     );
   }
 }

@@ -68,7 +68,7 @@
         <entry key="flutter">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../../../flutter/packages/flutter/lib" />
+              <option value="C:/SDKs/flutter/packages/flutter/lib" />
             </list>
           </value>
         </entry>
@@ -82,7 +82,7 @@
         <entry key="flutter_test">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../../../flutter/packages/flutter_test/lib" />
+              <option value="C:/SDKs/flutter/packages/flutter_test/lib" />
             </list>
           </value>
         </entry>
@@ -180,7 +180,7 @@
         <entry key="sky_engine">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../../../flutter/bin/cache/pkg/sky_engine/lib" />
+              <option value="C:/SDKs/flutter/bin/cache/pkg/sky_engine/lib" />
             </list>
           </value>
         </entry>
@@ -271,6 +271,9 @@
       </option>
     </properties>
     <CLASSES>
+      <root url="file://C:/SDKs/flutter/bin/cache/pkg/sky_engine/lib" />
+      <root url="file://C:/SDKs/flutter/packages/flutter/lib" />
+      <root url="file://C:/SDKs/flutter/packages/flutter_test/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.12.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.2/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/buffer-1.2.3/lib" />
@@ -306,9 +309,6 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/vm_service-14.3.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/web-1.1.1/lib" />
-      <root url="file://$PROJECT_DIR$/../../../flutter/bin/cache/pkg/sky_engine/lib" />
-      <root url="file://$PROJECT_DIR$/../../../flutter/packages/flutter/lib" />
-      <root url="file://$PROJECT_DIR$/../../../flutter/packages/flutter_test/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
