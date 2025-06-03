@@ -1,3 +1,4 @@
+import 'package:feuerwehr_magement_software/shared/Appbar.dart';
 import 'package:flutter/material.dart';
 import '../shared/navigationBar.dart';
 import 'MainPageCards.dart';
@@ -56,12 +57,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Freiwillige Feuerwehr \nEltville am Rhein",
-          textAlign: TextAlign.center,
-        ),
-      ),
+      appBar: appAppBar(),
 
 
       body: SingleChildScrollView(
@@ -70,8 +66,7 @@ class _MainPageState extends State<MainPage> {
             const SizedBox(height: 25),
 
             // Last Einsätze
-            Card(
-              child: Column(
+          Column(
                 children: [
                   Text(
                     "  Letzen Einsätze",
@@ -84,13 +79,11 @@ class _MainPageState extends State<MainPage> {
                   letzenEinsaetze[1],
                 ],
               ),
-            ),
 
             const SizedBox(height: 15),
 
             //Übungsdienste
-            Card(
-              child: Column( // Expanded kann hier nicht direkt verwendet werden, da es in einer Column ist
+Column( // Expanded kann hier nicht direkt verwendet werden, da es in einer Column ist
                 children: [
                   Text(
                     "Übungsdienste / Termine",
@@ -110,13 +103,10 @@ class _MainPageState extends State<MainPage> {
                   )
                 ],
               ),
-            ),
 
             const SizedBox(height: 20),
 
-            //Lehrgänge
-            Card(
-              child: Column( // Expanded kann hier nicht direkt verwendet werden
+Column( // Expanded kann hier nicht direkt verwendet werden
                 children: [
                   Text(
                     "Lehrgänge",
@@ -135,7 +125,6 @@ class _MainPageState extends State<MainPage> {
                     ],
                   )
                 ],
-              ),
             )
           ],
         ),
@@ -165,6 +154,7 @@ class _MainPageState extends State<MainPage> {
     UpdateLetzenEinsaetze();
     UpdateLehrgaenge();
     UpdateUebungsdienste();
+
   }
 
   @override

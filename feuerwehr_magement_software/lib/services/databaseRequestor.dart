@@ -7,11 +7,11 @@ class DatabaseRequestor {
   Future<void> connect() async {
     if (_conn == null || !_conn!.connected) {
       _conn = await MySQLConnection.createConnection(
-        host: "192.168.100.7",
-        port: 3309,
-        userName: "root",
-        password: "root",
-        databaseName: "test",
+        host: "mysql-1d87f374-jonahmaximilian1806-2fe7.i.aivencloud.com",
+        port: 19487,
+        userName: "avnadmin",
+        password: "AVNS_DdDmynPn-226JBqoIJq",
+        databaseName: "Projekt",
       );
       await _conn!.connect();
     }
@@ -39,4 +39,13 @@ class DatabaseRequestor {
       _conn = null;
     }
   }
+
+  Future<void> requestLastEinsaetze() async {
+    final result = await executeQuery("Select * From Einsatz ORDER BY EinsatzID DESC");
+
+    for (final row in result.rows) {
+      print("Einsatz: ${row.colAt(0)}");
+    }
+  }
+
 }

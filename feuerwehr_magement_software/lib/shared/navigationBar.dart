@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:feuerwehr_magement_software/routs.dart';
 
 
 class navBar extends StatefulWidget {
@@ -30,19 +29,19 @@ class _navBarState extends State<navBar> {
 
           switch(index){
             case 0:
-              Navigator.pushReplacementNamed(context, '/einsätze');
+              Navigator.pushNamed(context, '/einsätze');
               break;
             case 1:
-              Navigator.pushReplacementNamed(context, '/fahrzeuge');
+              Navigator.pushNamed(context, '/fahrzeuge');
               break;
             case 2:
-              Navigator.pushReplacementNamed(context, '/home');
+              Navigator.pushNamed(context, '/home');
               break;
             case 3:
-              Navigator.pushReplacementNamed(context, '/kalender');
+              Navigator.pushNamed(context, '/kalender');
               break;
             case 4:
-              Navigator.pushReplacementNamed(context, '/mehr');
+              Navigator.pushNamed(context, '/mehr');
               break;
           }
         });
@@ -50,4 +49,14 @@ class _navBarState extends State<navBar> {
   }
 }
 
+
+int _selectedPage = 3;
+
+void setSelectedPage(int index){
+  _selectedPage = index;
+}
+
+int getselectedPage(){
+  return _selectedPage;
+}
 

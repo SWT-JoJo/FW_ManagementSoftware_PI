@@ -93,6 +93,25 @@
                     }
                 },
                 {
+                    "source": "D:\\Dev\\FW_ManagementSoftware_PI\\feuerwehr_magement_software\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "176,832",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "483,998"
+                    },
+                    "to": {
+                        "startLines": "155,159",
+                        "startColumns": "4,4",
+                        "startOffsets": "7894,8075",
+                        "endLines": "158,161",
+                        "endColumns": "12,12",
+                        "endOffsets": "8070,8239"
+                    }
+                },
+                {
                     "source": "C:\\Users\\jonah\\.gradle\\caches\\8.10.2\\transforms\\13dd610fda78ecd8ad3daad9b8195d7e\\transformed\\jetified-activity-1.8.1\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3",
@@ -126,25 +145,6 @@
                         "endLines": "119,123,144,260,264",
                         "endColumns": "56,64,63,24,24",
                         "endOffsets": "5847,6024,7154,12575,12724"
-                    }
-                },
-                {
-                    "source": "G:\\Dev\\FW_ManagementSoftware_PI\\feuerwehr_magement_software\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "176,832",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "483,998"
-                    },
-                    "to": {
-                        "startLines": "155,159",
-                        "startColumns": "4,4",
-                        "startOffsets": "7894,8075",
-                        "endLines": "158,161",
-                        "endColumns": "12,12",
-                        "endOffsets": "8070,8239"
                     }
                 },
                 {

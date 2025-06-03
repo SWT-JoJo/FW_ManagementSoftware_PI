@@ -23,24 +23,26 @@ class LetzterEinsatzCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Icon(icon, size: 50, color: Colors.red[800]),
-
+            SizedBox(width: 10,),
             // EinsatzInfos
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  stichwort,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    stichwort,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
                   ),
-                ),
-                Text(datumUhrzeit),
-                Text(adresse),
-              ],
+                  Text(datumUhrzeit),
+                  Text(adresse),
+                ],
+              ),
             ),
             const SizedBox(width: 10),
             Card(

@@ -1,3 +1,4 @@
+import 'package:feuerwehr_magement_software/shared/Appbar.dart';
 import 'package:feuerwehr_magement_software/shared/navigationBar.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ class kalendarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar:AppBar(title: const Text("Kalender"),) ,
+      appBar:appAppBar() ,
 
 
 
