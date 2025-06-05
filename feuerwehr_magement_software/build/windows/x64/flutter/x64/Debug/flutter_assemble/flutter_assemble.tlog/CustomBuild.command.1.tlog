@@ -1,6 +1,6 @@
-^D:\DEV\FEUERWEHR_MAGEMENT_SOFTWARE\BUILD\WINDOWS\X64\CMAKEFILES\4E60CF40F3A38AB9AE18D04B6C1804DC\FLUTTER_WINDOWS.DLL.RULE
+^G:\DEV\FW_MANAGEMENTSOFTWARE_PI\FEUERWEHR_MAGEMENT_SOFTWARE\BUILD\WINDOWS\X64\CMAKEFILES\FE717D75AA5E0A2EDA3B94CE7C369DC7\FLUTTER_WINDOWS.DLL.RULE
 setlocal
-"D:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=D:\flutter PROJECT_DIR=D:\Dev\feuerwehr_magement_software FLUTTER_ROOT=D:\flutter FLUTTER_EPHEMERAL_DIR=D:\Dev\feuerwehr_magement_software\windows\flutter\ephemeral PROJECT_DIR=D:\Dev\feuerwehr_magement_software FLUTTER_TARGET=D:\Dev\feuerwehr_magement_software\lib\main.dart DART_DEFINES=Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz10cnVl DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=D:\Dev\feuerwehr_magement_software\.dart_tool\package_config.json D:/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\SDKs\flutter PROJECT_DIR=G:\Dev\FW_ManagementSoftware_PI\feuerwehr_magement_software FLUTTER_ROOT=C:\SDKs\flutter FLUTTER_EPHEMERAL_DIR=G:\Dev\FW_ManagementSoftware_PI\feuerwehr_magement_software\windows\flutter\ephemeral PROJECT_DIR=G:\Dev\FW_ManagementSoftware_PI\feuerwehr_magement_software FLUTTER_TARGET=G:\Dev\FW_ManagementSoftware_PI\feuerwehr_magement_software\lib\main.dart DART_DEFINES=Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz10cnVl DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=G:\Dev\FW_ManagementSoftware_PI\feuerwehr_magement_software\.dart_tool\package_config.json C:/SDKs/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -8,7 +8,7 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^D:\DEV\FEUERWEHR_MAGEMENT_SOFTWARE\BUILD\WINDOWS\X64\CMAKEFILES\35B15CFA381DC6BCAEFAD5187A1EFFA0\FLUTTER_ASSEMBLE.RULE
+^G:\DEV\FW_MANAGEMENTSOFTWARE_PI\FEUERWEHR_MAGEMENT_SOFTWARE\BUILD\WINDOWS\X64\CMAKEFILES\AF5A45DD201F22F6ECB5F9E6CD5C1F0E\FLUTTER_ASSEMBLE.RULE
 setlocal
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -16,9 +16,9 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^D:\DEV\FEUERWEHR_MAGEMENT_SOFTWARE\WINDOWS\FLUTTER\CMAKELISTS.TXT
+^G:\DEV\FW_MANAGEMENTSOFTWARE_PI\FEUERWEHR_MAGEMENT_SOFTWARE\WINDOWS\FLUTTER\CMAKELISTS.TXT
 setlocal
-"D:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/Dev/feuerwehr_magement_software/windows -BD:/Dev/feuerwehr_magement_software/build/windows/x64 --check-stamp-file D:/Dev/feuerwehr_magement_software/build/windows/x64/flutter/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SG:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/windows -BG:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64 --check-stamp-file G:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/flutter/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

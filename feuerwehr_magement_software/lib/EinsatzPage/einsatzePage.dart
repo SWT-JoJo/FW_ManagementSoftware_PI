@@ -40,6 +40,14 @@ class einsatzePage extends StatelessWidget {
                   LetzterEinsatzCard(stichwort: "F1 innerorts", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "beendet", icon: Icons.local_fire_department, statusColor: Colors.greenAccent),
                   LetzterEinsatzCard(stichwort: "F2-Y Menschenleben", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "laufend", icon: Icons.local_fire_department, statusColor: Colors.redAccent),
                   LetzterEinsatzCard(stichwort: "F1 innerorts", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "beendet", icon: Icons.local_fire_department, statusColor: Colors.greenAccent),
+                  LetzterEinsatzCard(stichwort: "F2-Y Menschenleben", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "laufend", icon: Icons.local_fire_department, statusColor: Colors.redAccent),
+                  LetzterEinsatzCard(stichwort: "F1 innerorts", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "beendet", icon: Icons.local_fire_department, statusColor: Colors.greenAccent),
+                  LetzterEinsatzCard(stichwort: "F2-Y Menschenleben", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "laufend", icon: Icons.local_fire_department, statusColor: Colors.redAccent),
+                  LetzterEinsatzCard(stichwort: "F2-Y Menschenleben", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "laufend", icon: Icons.local_fire_department, statusColor: Colors.redAccent),
+                  LetzterEinsatzCard(stichwort: "F1 innerorts", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "beendet", icon: Icons.local_fire_department, statusColor: Colors.greenAccent),
+                  LetzterEinsatzCard(stichwort: "F2-Y Menschenleben", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "laufend", icon: Icons.local_fire_department, statusColor: Colors.redAccent),
+                  LetzterEinsatzCard(stichwort: "F1 innerorts", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "beendet", icon: Icons.local_fire_department, statusColor: Colors.greenAccent),
+                  LetzterEinsatzCard(stichwort: "F1 innerorts", datumUhrzeit: "19:30", adresse: "Hasenstraße 4", status: "beendet", icon: Icons.local_fire_department, statusColor: Colors.greenAccent),
                 ],
               ),
             ),
@@ -50,10 +58,12 @@ class einsatzePage extends StatelessWidget {
       bottomNavigationBar: navBar(),
     );
   }
-
-
-
 }
+
+
+
+
+
 
 
 

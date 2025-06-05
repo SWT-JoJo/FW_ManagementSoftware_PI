@@ -1,4 +1,4 @@
-# Install script for directory: D:/Dev/feuerwehr_magement_software/windows/runner
+# Install script for directory: G:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/windows/runner
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,6 +35,6 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "D:/Dev/feuerwehr_magement_software/build/windows/x64/runner/install_local_manifest.txt"
+  file(WRITE "G:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
