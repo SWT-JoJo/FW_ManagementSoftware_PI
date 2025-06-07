@@ -65,22 +65,40 @@ class Fahrzeugepage extends StatelessWidget {
     return Scaffold(
       appBar: appAppBar(),
 
-      body: ListView.builder(
-        padding: const EdgeInsets.all(8),
-        // Set itemCount to the length of your data list
-        itemCount: fwFahrzeugCardDemo.length,
-        itemBuilder: (BuildContext context, int index) {
-          // Get the current vehicle's data map
-          final Map<String, dynamic> fahrzeugData = fwFahrzeugCardDemo[index];
+      body: Column(
+        children: [
+          SizedBox(height: 15,),
+          Center(
+            child: Text(
+              "Fahrzeuge",
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.red[800],
+              ),
+            ),
+          ),
 
-          // Pass the specific data points to fahrzeugCard
-          return fahrzeugCard(
-            // Access values from the map using their keys
-            statusInt: fahrzeugData['status'] as int,
-            funkName: fahrzeugData['funkname'] as String,
-            typ: fahrzeugData['bezeichnung'] as String,
-          );
-        },
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              // Set itemCount to the length of your data list
+              itemCount: fwFahrzeugCardDemo.length,
+              itemBuilder: (BuildContext context, int index) {
+                // Get the current vehicle's data map
+                final Map<String, dynamic> fahrzeugData = fwFahrzeugCardDemo[index];
+
+                // Pass the specific data points to fahrzeugCard
+                return fahrzeugCard(
+                  // Access values from the map using their keys
+                  statusInt: fahrzeugData['status'] as int,
+                  funkName: fahrzeugData['funkname'] as String,
+                  typ: fahrzeugData['bezeichnung'] as String,
+                );
+              },
+            ),
+          ),
+        ],
       ),
 
       bottomNavigationBar: navBar(),

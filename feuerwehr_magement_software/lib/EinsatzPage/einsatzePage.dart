@@ -17,7 +17,7 @@ class einsatzePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
+            SizedBox(height:15),
             Center(
               child: Text(
                 "Einsätze",
@@ -28,8 +28,7 @@ class einsatzePage extends StatelessWidget {
                 ),
               ),
             ),
-        
-            SizedBox(height: 25,),
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
