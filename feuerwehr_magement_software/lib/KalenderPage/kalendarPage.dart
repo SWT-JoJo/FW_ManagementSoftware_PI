@@ -72,7 +72,7 @@ class _kalendarPageState extends State<kalendarPage> {
           ),
 
           SizedBox(
-            height: 300,
+            height: 320,
             child: Expanded(
               child: Padding(
                 padding: EdgeInsets.all(8),
@@ -93,32 +93,17 @@ class _kalendarPageState extends State<kalendarPage> {
                         scrollDirection: Axis.horizontal,
                         children: [
                           termineWidget(
-                            thema: "Fwdv32222222222222222",
-                            datum: "19.5.2025",
-                            uhrstart: TimeOfDay(hour: 19, minute: 00),
-                            uhrende: TimeOfDay(hour: 21, minute: 00),
-                            verantwortlicher: "Max Musterman",
-                            color: Colors.orangeAccent,
-                            abteilung: "Jugenfeuerwehr",
-                          ),
-                          termineWidget(
-                            thema: "Fwdv32222222222222222",
-                            datum: "19.5.2025",
-                            uhrstart: TimeOfDay(hour: 19, minute: 00),
-                            uhrende: TimeOfDay(hour: 21, minute: 00),
-                            verantwortlicher: "Max Musterman",
-                            color: Colors.orangeAccent,
-                            abteilung: "Jugenfeuerwehr",
-                          ),
-                          termineWidget(
-                            thema: "Fwdv32222222222222222",
-                            datum: "19.5.2025",
-                            uhrstart: TimeOfDay(hour: 19, minute: 00),
-                            uhrende: TimeOfDay(hour: 21, minute: 00),
-                            verantwortlicher: "Max Musterman",
-                            color: Colors.redAccent,
-                            abteilung: "Aktive",
-                          ),
+                              thema: "Fwdv3",
+                              datum: "24.05.2024",
+                              uhrstart: TimeOfDay(hour: 18, minute: 00),
+                              uhrende: TimeOfDay(hour: 20, minute: 00),
+                              verantwortlicher: "Max Musterman",
+                              abteilung: "Jugenfeuerwehr",
+                              color: Colors.orangeAccent,
+                              plz: "65343",
+                              Ort: "Schierstein",
+                              Strasse: "Musterstraßeße 5",
+                          )
                         ],
                       ),
                     ),

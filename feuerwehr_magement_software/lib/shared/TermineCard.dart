@@ -9,6 +9,11 @@ class termineWidget extends StatelessWidget {
   final String abteilung;
   final Color color;
 
+  //Ort Daten
+  final String plz;
+  final String Ort;
+  final String Strasse;
+
 
   const termineWidget({
     super.key,
@@ -19,13 +24,24 @@ class termineWidget extends StatelessWidget {
     required this.verantwortlicher,
     required this.abteilung,
     required this.color,
+    required this.plz,
+    required this.Ort,
+    required this.Strasse,
   });
+
+  String limitOrtLength(String text){
+    if(text.length > 18){
+      return "${text.substring(0, 16)}...";
+    } else {
+      return text;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 190,
-      height: 100,
+      width: 200,
+      height: 250,
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -53,6 +69,8 @@ class termineWidget extends StatelessWidget {
               terminInfo(icon: Icon(Icons.calendar_month), info: datum),
               SizedBox(height: 5,),
               terminInfo(icon: Icon(Icons.person), info: verantwortlicher),
+              SizedBox(height: 5,),
+              terminInfo(icon: Icon(Icons.location_on), info: "$Strasse \n" + limitOrtLength("$plz $Ort")),
 
               SizedBox(height: 20,),
               Card(

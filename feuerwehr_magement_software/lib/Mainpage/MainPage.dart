@@ -82,40 +82,28 @@ class _MainPageState extends State<MainPage> {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                    child:  ListView(
-                      padding: const EdgeInsets.all(8),
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        termineWidget(
-                          thema: "Fwdv32222222222222222",
-                          datum: "19.5.2025",
-                          uhrstart: TimeOfDay(hour: 19, minute: 00),
-                          uhrende: TimeOfDay(hour: 21, minute: 00),
-                          verantwortlicher: "Max Musterman",
-                          color: Colors.orangeAccent,
-                          abteilung: "Jugenfeuerwehr",
-                        ),
-                        termineWidget(
-                          thema: "Fwdv32222222222222222",
-                          datum: "19.5.2025",
-                          uhrstart: TimeOfDay(hour: 19, minute: 00),
-                          uhrende: TimeOfDay(hour: 21, minute: 00),
-                          verantwortlicher: "Max Musterman",
-                          color: Colors.orangeAccent,
-                          abteilung: "Jugenfeuerwehr",
-                        ),
-                        termineWidget(
-                          thema: "Fwdv32222222222222222",
-                          datum: "19.5.2025",
-                          uhrstart: TimeOfDay(hour: 19, minute: 00),
-                          uhrende: TimeOfDay(hour: 21, minute: 00),
-                          verantwortlicher: "Max Musterman",
-                          color: Colors.redAccent,
-                          abteilung: "Aktive",
-                        ),
-                      ],
-                    ),
+                  // **Wichtig: Expanded durch SizedBox mit fester Höhe ersetzen**
+                  child: SizedBox(
+                    height: 270, // Beispielhöhe: Die Höhe der TerminCard (200) + etwas Padding
+                    child: ListView.builder(
+                      itemCount: 4,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+
+                      return termineWidget(
+                        thema: "Erste Hilfe + Fwdv3 + WettkampfMittwoch",
+                        datum: "24.05.2024",
+                        uhrstart: TimeOfDay(hour: 18, minute: 00),
+                        uhrende: TimeOfDay(hour: 20, minute: 00),
+                        verantwortlicher: "Max Musterman",
+                        abteilung: "Jugenfeuerwehr",
+                        color: Colors.orangeAccent,
+                        plz: "65343",
+                        Ort: "Schierstein",
+                        Strasse: "Musterstraßeße 5",
+                      );
+                    }
+                    )
                   ),
                 ),
 
@@ -135,6 +123,8 @@ class _MainPageState extends State<MainPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                // GridView.count ist in einer Column ohne Expanded oder fester Höhe ok,
+                // solange shrinkWrap: true und NeverScrollableScrollPhysics gesetzt sind.
                 GridView.count(
                   crossAxisCount: 2,
                   shrinkWrap: true,
