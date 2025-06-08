@@ -1,1 +1,0 @@
- D:\\Dev\\feuerwehr_magement_software\\.dart_tool\\flutter_build\\c2e1b82b311f42b07ad1cb3aa70e7ddb\\native_assets.json: 
