@@ -16,3 +16,25 @@ class Fahrzeugepage extends StatelessWidget {
     );
   }
 }
+
+
+
+
+//FahrzeugCard
+
+class fahrzeugCard extends StatelessWidget {
+  static const Color statusColor = Colors.red;
+  static const int status = 1;
+  const fahrzeugCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Row(
+        children: [
+          ColoredBox(color: statusColor, child: Text(status.toString()),)
+        ],
+      ),
+    );
+  }
+}
