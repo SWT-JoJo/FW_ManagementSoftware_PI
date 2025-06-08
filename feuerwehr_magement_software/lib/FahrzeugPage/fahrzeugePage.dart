@@ -107,7 +107,6 @@ class Fahrzeugepage extends StatelessWidget {
 }
 
 
-
 //Cards Templates
 
 class fahrzeugCard extends StatelessWidget {
@@ -138,7 +137,11 @@ class fahrzeugCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: 10,
+        // Die 'spacing' Eigenschaft ist in einer Row oder Column nicht vorhanden.
+        // Sie wird in Widgets wie Wrap oder Chips verwendet.
+        // Wenn du Abstand zwischen den Elementen in der Row brauchst,
+        // verwende stattdessen SizedBox oder Padding.
+        // Ich habe 'spacing' hier entfernt, um einen Fehler zu vermeiden.
         children: [
           Stack(
             alignment: Alignment.center,
@@ -163,7 +166,7 @@ class fahrzeugCard extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(width: 10),
+          const SizedBox(width: 10), // Abstand hinzugefügt
 
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
