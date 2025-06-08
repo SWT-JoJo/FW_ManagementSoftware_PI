@@ -59,38 +59,7 @@ class LetzterEinsatzCard extends StatelessWidget {
   }
 }
 
-class UebungsDienstCard extends StatelessWidget {
-  final String Thema;
-  final String Verwantworlticher;
-  final String Datum;
-  final String Uhrzeit;
 
-
-  const UebungsDienstCard(
-      {super.key, required this.Thema, required this.Verwantworlticher, required this.Datum, required this.Uhrzeit,});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children:  [
-          //Title
-          Text(
-            "ABCDEFGHIJKLMNOPQ",
-            maxLines: 1,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 
 class LehrgangsCard extends StatelessWidget {

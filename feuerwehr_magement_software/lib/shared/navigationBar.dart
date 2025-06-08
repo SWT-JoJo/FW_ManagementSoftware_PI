@@ -9,7 +9,7 @@ class navBar extends StatefulWidget {
 }
 
 class _navBarState extends State<navBar> {
-  int _selectedIndex = getselectedPage();
+  final int _selectedIndex = getselectedPage();
 
 
   @override

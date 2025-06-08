@@ -12,7 +12,8 @@ ThemeData theme = ThemeData(
       titleTextStyle: TextStyle(
         fontSize: 25,
         fontWeight: FontWeight.bold,
-      )
+      ),
+
   ),
   cardTheme: CardTheme(
     elevation: 3,
