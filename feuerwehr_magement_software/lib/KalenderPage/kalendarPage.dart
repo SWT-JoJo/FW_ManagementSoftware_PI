@@ -25,61 +25,61 @@ class _kalendarPageState extends State<kalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appAppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(height: 15),
-          Center(
-            child: Text(
-              "Dienstplan",
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.red[800],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(height: 15),
+            Center(
+              child: Text(
+                "Dienstplan",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red[800],
+                ),
               ),
             ),
-          ),
-
-          TableCalendar(
-            locale: 'en_US',
-            rowHeight: 50,
-            focusedDay: kalendarPage.selectedDay,
-            firstDay: DateTime.utc(2010, 1, 1),
-            lastDay: DateTime.utc(2050, 12, 31),
-            selectedDayPredicate:
-                (day) => isSameDay(day, kalendarPage.selectedDay),
-            onDaySelected: onDaySelected,
-            headerStyle: HeaderStyle(
-              formatButtonVisible: false,
-              titleCentered: true,
-              titleTextStyle: TextStyle(
-                fontSize: 20,
-                color: Colors.red[800],
-                fontWeight: FontWeight.bold,
+        
+            TableCalendar(
+              locale: 'en_US',
+              rowHeight: 50,
+              focusedDay: kalendarPage.selectedDay,
+              firstDay: DateTime.utc(2010, 1, 1),
+              lastDay: DateTime.utc(2050, 12, 31),
+              selectedDayPredicate:
+                  (day) => isSameDay(day, kalendarPage.selectedDay),
+              onDaySelected: onDaySelected,
+              headerStyle: HeaderStyle(
+                formatButtonVisible: false,
+                titleCentered: true,
+                titleTextStyle: TextStyle(
+                  fontSize: 20,
+                  color: Colors.red[800],
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+        
+              calendarStyle: CalendarStyle(
+                selectedDecoration: BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
+                ),
+                todayDecoration: BoxDecoration(
+                  color: Colors.red[200],
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
-
-            calendarStyle: CalendarStyle(
-              selectedDecoration: BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-              todayDecoration: BoxDecoration(
-                color: Colors.red[200],
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
-
-          SizedBox(
-            height: 320,
-            child: Expanded(
+        
+            SizedBox(
+              height: 320,
               child: Padding(
                 padding: EdgeInsets.all(8),
                 child: Column(
                   children: [
                     Text(
-                      "Termine",
+                      "Termine am ${kalendarPage.selectedDay.day}.${kalendarPage.selectedDay.month}.${kalendarPage.selectedDay.year}",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -111,8 +111,8 @@ class _kalendarPageState extends State<kalendarPage> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
 
       bottomNavigationBar: navBar(),

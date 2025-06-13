@@ -1,0 +1,10 @@
+^D:\DEV\FW_MANAGEMENTSOFTWARE_PI\FEUERWEHR_MAGEMENT_SOFTWARE\BUILD\WINDOWS\X64\CMAKEFILES\41AB59926444487808A367CD5739369D\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
