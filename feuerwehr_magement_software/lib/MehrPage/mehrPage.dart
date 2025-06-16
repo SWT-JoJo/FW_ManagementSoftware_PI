@@ -17,35 +17,33 @@ class _mehrPageState extends State<mehrPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appAppBar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: ListView(
-            children: [
-              SizedBox(height: 15),
-              Text(
-                "Mehr",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red[800],
-                ),
+      body: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: ListView(
+          children: [
+            SizedBox(height: 15),
+            Text(
+              "Mehr",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.red[800],
               ),
-              if (isAdmin)
-                navigationCard(
-                  icon: Icon(Icons.admin_panel_settings),
-                  text: "Admin Pannel",
-                  targetPage: AdminPannel(), // Korrekte Klasse verwenden
-                ),
-              navigationCard(icon: Icon(Icons.person), text: "Profil Einstellungen"),
-              navigationCard(icon: Icon(Icons.settings), text: "App Einstellungen"),
-              navigationCard(icon: Icon(Icons.group), text: "Benutzer"),
-              navigationCard(icon: Icon(Icons.school), text: "Lehrgänge"),
-              navigationCard(icon: Icon(Icons.book), text: " (tba)"),
-              navigationCard(icon: Icon(Icons.fire_hydrant_alt_sharp), text: "Hydrantenkarte (tba)"),
-            ],
-          ),
+            ),
+            if (isAdmin)
+              navigationCard(
+                icon: Icon(Icons.admin_panel_settings),
+                text: "Admin Pannel",
+                targetPage: AdminPannel(), // Korrekte Klasse verwenden
+              ),
+            navigationCard(icon: Icon(Icons.person), text: "Profil Einstellungen"),
+            navigationCard(icon: Icon(Icons.settings), text: "App Einstellungen"),
+            navigationCard(icon: Icon(Icons.group), text: "Benutzer"),
+            navigationCard(icon: Icon(Icons.school), text: "Lehrgänge"),
+            navigationCard(icon: Icon(Icons.book), text: " (tba)"),
+            navigationCard(icon: Icon(Icons.fire_hydrant_alt_sharp), text: "Hydrantenkarte (tba)"),
+          ],
         ),
       ),
       bottomNavigationBar: navBar(),

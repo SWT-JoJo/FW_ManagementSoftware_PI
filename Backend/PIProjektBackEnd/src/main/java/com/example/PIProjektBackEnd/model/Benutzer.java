@@ -1,11 +1,12 @@
 package com.example.PIProjektBackEnd.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference; // Wird eventuell nicht mehr benötigt für diese Felder
+import com.fasterxml.jackson.annotation.JsonIgnore; // NEU: Importiere JsonIgnore
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonProperty; // Für @JsonProperty
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.HashSet;
-import java.util.Set; // Verwende Set statt List für Many-to-Many-ähnliche Beziehungen, da Reihenfolge nicht wichtig ist und Duplikate vermieden werden
+import java.util.Set;
 
 @Entity
 @Table(name = "benutzer")
@@ -13,11 +14,11 @@ public class Benutzer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pnr") // Explizite Spaltenbenennung ist gut
+    @Column(name = "pnr")
     private Long pnr;
 
     @Column(name = "enr")
-    private Integer enr; // Wrapper-Typ, wenn nullable in DB
+    private Integer enr;
 
     @Column(name = "name")
     private String name;
@@ -29,28 +30,29 @@ public class Benutzer {
     private String strasse;
 
     @Column(name = "plz")
-    private Integer plz; // Wrapper-Typ, wenn nullable in DB
+    private Integer plz;
 
     @Column(name = "ort")
     private String ort;
 
-    @Column(name = "email", unique = true, nullable = false) // email sollte unique und not null sein
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @Column(name ="isAdmin")
-    private boolean isAdmin;
+    private boolean isAdmin; // boolean ist ok, wenn es nie null sein soll.
 
-    @Column(name = "passwort", nullable = false) // Passwort ist nicht null
+    @Column(name = "passwort", nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Verhindert, dass das Passwort in JSON-Responses erscheint
-    private String passwort; // Korrekte Schreibweise und Mapping
+    private String passwort;
 
+    // FÜGE @JsonIgnore HINZU FÜR FELDER, DIE NICHT ÜBER DEN REQUEST-BODY KOMMEN SOLLEN
     @ManyToMany
     @JoinTable(
             name = "teilnahme_uebungsdienst",
             joinColumns = @JoinColumn(name = "pnr"),
             inverseJoinColumns = @JoinColumn(name = "uenr")
     )
-    @JsonManagedReference
+    @JsonIgnore // <-- Hinzugefügt! Jackson ignoriert dieses Feld beim Deserialisieren (und Serialisieren)
     private Set<Uebungsdienst>  uebungsdienste= new HashSet<>();
 
 
@@ -60,7 +62,7 @@ public class Benutzer {
             joinColumns = @JoinColumn(name = "pnr"),
             inverseJoinColumns = @JoinColumn(name = "qnr")
     )
-    @JsonManagedReference
+    @JsonIgnore // <-- Hinzugefügt!
     private Set<Qualifikation> qualifikationen = new HashSet<>();
 
     @ManyToMany
@@ -69,12 +71,16 @@ public class Benutzer {
             joinColumns = @JoinColumn(name = "pnr"),
             inverseJoinColumns = @JoinColumn(name = "lnr")
     )
-    @JsonManagedReference
+    @JsonIgnore // <-- Hinzugefügt!
     private Set<Lehrgang> lehrgaenge = new HashSet<>();
 
     public Benutzer() {
     }
 
+    // ACHTUNG: Dein Konstruktor akzeptiert Set<Qualifikation> und Set<Lehrgang>
+    // Wenn du @JsonIgnore verwendest, werden diese Felder nicht automatisch
+    // vom JSON-Body gefüllt. Das ist auch in Ordnung, da du sie beim Erstellen
+    // eines Benutzers sowieso nicht übergeben möchtest.
     public Benutzer(Integer enr, String name, String vorname, String strasse, Integer plz, String ort, String email, String passwort, Set<Qualifikation> qualifikationen, Set<Lehrgang> lehrgaenge) {
         this.enr = enr;
         this.name = name;
@@ -84,6 +90,10 @@ public class Benutzer {
         this.ort = ort;
         this.email = email;
         this.passwort = passwort;
+        // Diese Zuweisungen werden bei @RequestBody-Deserialisierung ignoriert,
+        // wenn @JsonIgnore auf den Feldern ist.
+        // Sie sind nur relevant, wenn du Benutzer-Objekte manuell erstellst oder
+        // aus der Datenbank lädst.
         this.qualifikationen = qualifikationen;
         this.lehrgaenge = lehrgaenge;
     }
@@ -103,6 +113,15 @@ public class Benutzer {
     public void setQualifikationen(Set<Qualifikation> qualifikationen) {
         this.qualifikationen = qualifikationen;
     }
+
+    public Set<Uebungsdienst> getUebungsdienste() { // Getter für uebungsdienste fehlt im Originalcode, sollte hinzugefügt werden
+        return uebungsdienste;
+    }
+
+    public void setUebungsdienste(Set<Uebungsdienst> uebungsdienste) { // Setter für uebungsdienste fehlt
+        this.uebungsdienste = uebungsdienste;
+    }
+
 
     public String getPasswort() {
         return passwort;
@@ -174,5 +193,13 @@ public class Benutzer {
 
     public void setPnr(Long pnr) {
         this.pnr = pnr;
+    }
+
+    public boolean isAdmin() { // Getter für isAdmin
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) { // Setter für isAdmin
+        isAdmin = admin;
     }
 }
