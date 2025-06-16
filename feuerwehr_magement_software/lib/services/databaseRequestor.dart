@@ -1,51 +1,154 @@
-import 'package:mysql_client/mysql_client.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class DatabaseRequestor {
-  MySQLConnection? _conn;
 
-  // Stellt sicher, dass eine Verbindung besteht (einmalig)
-  Future<void> connect() async {
-    if (_conn == null || !_conn!.connected) {
-      _conn = await MySQLConnection.createConnection(
-        host: "mysql-1d87f374-jonahmaximilian1806-2fe7.i.aivencloud.com",
-        port: 19487,
-        userName: "avnadmin",
-        password: "AVNS_DdDmynPn-226JBqoIJq",
-        databaseName: "Projekt",
-      );
-      await _conn!.connect();
+class databaseRequestor{
+//  static const String url = "http://10.5.241.156:8080"; //Schule
+static const String url = "http://192.168.178.35:8080"; //Home
+
+
+  //Fahrzeugdaten holen
+  Future<List<dynamic>> getFahrzeuge() async {
+    final urlToUse = '$url/Fahrzeuge';
+    print('⚠️ Request an: $urlToUse');
+    final response = await http.get(Uri.parse(urlToUse));
+
+    print("🔁 Statuscode: ${response.statusCode}");
+    print("📦 Body: ${response.body}");
+
+    if (response.statusCode == 200) {
+      try {
+        final decoded = json.decode(response.body);
+        print("✅ JSON-Decode erfolgreich: $decoded");
+
+        if (decoded is List) {
+          return decoded;
+        } else {
+          throw Exception("❌ JSON ist kein List-Objekt: $decoded");
+        }
+      } catch (e) {
+        print("❌ Fehler beim JSON-Dekodieren: $e");
+        throw Exception("Fehler beim Verarbeiten der Einsatzdaten");
+      }
+    } else {
+      throw Exception("❌ Fehler beim Laden der Einsatze – Status: ${response.statusCode}");
     }
   }
 
-  // Führt eine beliebige SELECT-Abfrage aus und gibt das Ergebnis zurück
-  Future<IResultSet> executeQuery(String query) async {
-    await connect(); // Verbindung sicherstellen
-    return await _conn!.execute(query);
-  }
+Future<List<dynamic>> getEinsaetze() async {
+  final urlToUse = '$url/Einsatz';
+  print('⚠️ Request an: $urlToUse');
+  final response = await http.get(Uri.parse(urlToUse));
 
-  // Beispiel: Gibt den Namen des Benutzers mit ID 1 aus
-  Future<void> requestUsername() async {
-    final result = await executeQuery("SELECT name FROM users WHERE id = 1");
+  print("🔁 Statuscode: ${response.statusCode}");
+  print("📦 Body: ${response.body}");
 
-    for (final row in result.rows) {
-      print("Username: ${row.colAt(0)}");
+  if (response.statusCode == 200) {
+    try {
+      final decoded = json.decode(response.body);
+      print("✅ JSON-Decode erfolgreich: $decoded");
+
+      if (decoded is List) {
+        return decoded;
+      } else {
+        throw Exception("❌ JSON ist kein List-Objekt: $decoded");
+      }
+    } catch (e) {
+      print("❌ Fehler beim JSON-Dekodieren: $e");
+      throw Exception("Fehler beim Verarbeiten der Fahrzeugdaten");
     }
+  } else {
+    throw Exception("❌ Fehler beim Laden der Fahrzeuge – Status: ${response.statusCode}");
   }
+}
 
-  // Verbindung sauber beenden (z. B. beim App-Ende)
-  Future<void> close() async {
-    if (_conn != null && _conn!.connected) {
-      await _conn!.close();
-      _conn = null;
+
+Future<List<dynamic>> getUebungsdiensteAm(DateTime date) async {
+  final urlToUse = '$url/Uebungsdienste/${date.year}-${_twoDigits(date.month)}-${_twoDigits(date.day)}';
+  print('⚠️ Request an: $urlToUse');
+  final response = await http.get(Uri.parse(urlToUse));
+
+  print("🔁 Statuscode: ${response.statusCode}");
+  print("📦 Body: ${response.body}");
+
+  if (response.statusCode == 200) {
+    try {
+      final decoded = json.decode(response.body);
+      print("✅ JSON-Decode erfolgreich: $decoded");
+
+      if (decoded is List) {
+        return decoded;
+      } else {
+        throw Exception("❌ JSON ist kein List-Objekt: $decoded");
+      }
+    } catch (e) {
+      print("❌ Fehler beim JSON-Dekodieren: $e");
+      throw Exception("Fehler beim Verarbeiten der Fahrzeugdaten");
     }
+  } else {
+    throw Exception("❌ Fehler beim Laden der Fahrzeuge – Status: ${response.statusCode}");
   }
+}
 
-  Future<void> requestLastEinsaetze() async {
-    final result = await executeQuery("Select * From Einsatz ORDER BY EinsatzID DESC");
-
-    for (final row in result.rows) {
-      print("Einsatz: ${row.colAt(0)}");
+String _twoDigits(int n) {
+    if(n.toString().length == 1){
+      return '0$n';
+    } else {
+      return n.toString();
     }
+}
+
+Future<List<dynamic>> getUebungsdienste() async {
+  final urlToUse = '$url/Uebungsdienste';
+  print('⚠️ Request an: $urlToUse');
+  final response = await http.get(Uri.parse(urlToUse));
+
+  print("🔁 Statuscode: ${response.statusCode}");
+  print("📦 Body: ${response.body}");
+
+  if (response.statusCode == 200) {
+    try {
+      final decoded = json.decode(response.body);
+      print("✅ JSON-Decode erfolgreich: $decoded");
+
+      if (decoded is List) {
+        return decoded;
+      } else {
+        throw Exception("❌ JSON ist kein List-Objekt: $decoded");
+      }
+    } catch (e) {
+      print("❌ Fehler beim JSON-Dekodieren: $e");
+      throw Exception("Fehler beim Verarbeiten der Fahrzeugdaten");
+    }
+  } else {
+    throw Exception("❌ Fehler beim Laden der Fahrzeuge – Status: ${response.statusCode}");
   }
+}
+
+
+Future<void> createUser({
+  required String name,
+  required String email,
+  required String password,
+}) async {
+  final urlToUSE = Uri.parse('$url/users'); // Beispiel-Endpunkt
+
+  final response = await http.post(
+    urlToUSE,
+    headers: {'Content-Type': 'application/json'},
+    body: json.encode({
+      'name': name,
+      'email': email,
+      'password': password,
+    }),
+  );
+
+  if (response.statusCode != 201) {
+    // Status 201 = Created
+    throw Exception('Fehler beim Erstellen des Nutzers: ${response.body}');
+  }
+}
+
 
 }
+

@@ -1,5 +1,6 @@
 package com.example.PIProjektBackEnd.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty; // Für @JsonProperty
 
@@ -36,22 +37,45 @@ public class Benutzer {
     @Column(name = "email", unique = true, nullable = false) // email sollte unique und not null sein
     private String email;
 
+    @Column(name ="isAdmin")
+    private boolean isAdmin;
+
     @Column(name = "passwort", nullable = false) // Passwort ist nicht null
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Verhindert, dass das Passwort in JSON-Responses erscheint
     private String passwort; // Korrekte Schreibweise und Mapping
 
-    // Die Many-to-Many-Beziehung wird über die Join-Entität abgebildet
-    @OneToMany(mappedBy = "benutzer", cascade = CascadeType.ALL, orphanRemoval = true)
-    // cascade = CascadeType.ALL: Operationen auf Benutzer kaskadieren zu Teilnahmen
-    // orphanRemoval = true: Entfernt Teilnahmen, wenn sie aus der Sammlung entfernt werden
-    private Set<TeilnahmeUebungsdienst> teilnahmenUebungsdienst = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "teilnahme_uebungsdienst",
+            joinColumns = @JoinColumn(name = "pnr"),
+            inverseJoinColumns = @JoinColumn(name = "uenr")
+    )
+    @JsonManagedReference
+    private Set<Uebungsdienst>  uebungsdienste= new HashSet<>();
 
-    // --- Constructors ---
+
+    @ManyToMany
+    @JoinTable(
+            name = "benutzer_qualifikationen",
+            joinColumns = @JoinColumn(name = "pnr"),
+            inverseJoinColumns = @JoinColumn(name = "qnr")
+    )
+    @JsonManagedReference
+    private Set<Qualifikation> qualifikationen = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "teilnahme_lehrgang",
+            joinColumns = @JoinColumn(name = "pnr"),
+            inverseJoinColumns = @JoinColumn(name = "lnr")
+    )
+    @JsonManagedReference
+    private Set<Lehrgang> lehrgaenge = new HashSet<>();
+
     public Benutzer() {
     }
 
-    // Konstruktor für die Erstellung eines neuen Benutzer-Objekts (ohne ID)
-    public Benutzer(int enr, String name, String vorname, String strasse, Integer plz, String ort, String email, String passwort) {
+    public Benutzer(Integer enr, String name, String vorname, String strasse, Integer plz, String ort, String email, String passwort, Set<Qualifikation> qualifikationen, Set<Lehrgang> lehrgaenge) {
         this.enr = enr;
         this.name = name;
         this.vorname = vorname;
@@ -60,63 +84,32 @@ public class Benutzer {
         this.ort = ort;
         this.email = email;
         this.passwort = passwort;
+        this.qualifikationen = qualifikationen;
+        this.lehrgaenge = lehrgaenge;
     }
 
-    // --- Getter and Setter methods ---
-    public Long getPnr() {
-        return pnr;
+    public Set<Lehrgang> getLehrgaenge() {
+        return lehrgaenge;
     }
 
-    public void setPnr(Long pnr) {
-        this.pnr = pnr;
+    public void setLehrgaenge(Set<Lehrgang> lehrgaenge) {
+        this.lehrgaenge = lehrgaenge;
     }
 
-    public Integer getEnr() {
-        return enr;
+    public Set<Qualifikation> getQualifikationen() {
+        return qualifikationen;
     }
 
-    public void setEnr(Integer enr) {
-        this.enr = enr;
+    public void setQualifikationen(Set<Qualifikation> qualifikationen) {
+        this.qualifikationen = qualifikationen;
     }
 
-    public String getName() {
-        return name;
+    public String getPasswort() {
+        return passwort;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getVorname() {
-        return vorname;
-    }
-
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
-    }
-
-    public String getStrasse() {
-        return strasse;
-    }
-
-    public void setStrasse(String strasse) {
-        this.strasse = strasse;
-    }
-
-    public Integer getPlz() {
-        return plz;
-    }
-
-    public void setPlz(Integer plz) {
-        this.plz = plz;
-    }
-
-    public String getOrt() {
-        return ort;
-    }
-
-    public void setOrt(String ort) {
-        this.ort = ort;
+    public void setPasswort(String passwort) {
+        this.passwort = passwort;
     }
 
     public String getEmail() {
@@ -127,30 +120,59 @@ public class Benutzer {
         this.email = email;
     }
 
-    public String getPasswort() { // Getter für das Passwort
-        return passwort;
+    public String getOrt() {
+        return ort;
     }
 
-    public void setPasswort(String passwort) { // Setter für das Passwort
-        this.passwort = passwort;
+    public void setOrt(String ort) {
+        this.ort = ort;
     }
 
-    public Set<TeilnahmeUebungsdienst> getTeilnahmenUebungsdienst() {
-        return teilnahmenUebungsdienst;
+    public Integer getPlz() {
+        return plz;
     }
 
-    public void setTeilnahmenUebungsdienst(Set<TeilnahmeUebungsdienst> teilnahmenUebungsdienst) {
-        this.teilnahmenUebungsdienst = teilnahmenUebungsdienst;
+    public void setPlz(Integer plz) {
+        this.plz = plz;
     }
 
-    // Hilfsmethoden für die Bidirektionalität
-    public void addTeilnahmeUebungsdienst(TeilnahmeUebungsdienst teilnahme) {
-        this.teilnahmenUebungsdienst.add(teilnahme);
-        teilnahme.setBenutzer(this);
+    public String getStrasse() {
+        return strasse;
     }
 
-    public void removeTeilnahmeUebungsdienst(TeilnahmeUebungsdienst teilnahme) {
-        this.teilnahmenUebungsdienst.remove(teilnahme);
-        teilnahme.setBenutzer(null);
+    public void setStrasse(String strasse) {
+        this.strasse = strasse;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getEnr() {
+        return enr;
+    }
+
+    public void setEnr(Integer enr) {
+        this.enr = enr;
+    }
+
+    public Long getPnr() {
+        return pnr;
+    }
+
+    public void setPnr(Long pnr) {
+        this.pnr = pnr;
     }
 }

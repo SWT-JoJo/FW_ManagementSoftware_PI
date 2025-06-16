@@ -1,5 +1,7 @@
 package com.example.PIProjektBackEnd.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -14,8 +16,9 @@ public class Uebungsdienst {
     @Column(name = "uenr") // Explizite Spaltenbenennung
     private Long uenr;
 
-    @Column(name = "verantwortlich") // Spaltenname im DB Schema
-    private Long verantwortlich; // Typ sollte Long sein, wenn es ein FK auf Benutzer.pnr ist
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "verantwortlich")
+    private Benutzer verantwortlich;
 
     @Column(name = "thema")
     private String thema;
@@ -30,23 +33,19 @@ public class Uebungsdienst {
     private String ort;
 
     @Column(name = "start")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime start;
 
     @Column(name = "ende")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime ende;
 
-    // Die Many-to-Many-Beziehung wird über die Join-Entität abgebildet
-    @OneToMany(mappedBy = "uebungsdienst", cascade = CascadeType.ALL, orphanRemoval = true)
-    // cascade = CascadeType.ALL: Operationen auf Uebungsdienst kaskadieren zu Teilnahmen
-    // orphanRemoval = true: Entfernt Teilnahmen, wenn sie aus der Sammlung entfernt werden
-    private Set<TeilnahmeUebungsdienst> teilnahmenUebungsdienst = new HashSet<>();
 
+    @ManyToMany(mappedBy = "uebungsdienste")
+    @JsonBackReference
+    private Set<Benutzer> teilnehmer = new HashSet<>();
 
-    // --- Constructors ---
-    public Uebungsdienst() {
-    }
-
-    public Uebungsdienst(Long verantwortlich, String thema, String strasse, Integer plz, String ort, LocalDateTime start, LocalDateTime ende) {
+    public Uebungsdienst(Benutzer verantwortlich, String thema, String strasse, Integer plz, String ort, LocalDateTime start, LocalDateTime ende, Set<Benutzer> teilnehmer) {
         this.verantwortlich = verantwortlich;
         this.thema = thema;
         this.strasse = strasse;
@@ -54,9 +53,12 @@ public class Uebungsdienst {
         this.ort = ort;
         this.start = start;
         this.ende = ende;
+        this.teilnehmer = teilnehmer;
     }
 
-    // --- Getter and Setter methods ---
+    public Uebungsdienst() {
+    }
+
     public Long getUenr() {
         return uenr;
     }
@@ -65,11 +67,11 @@ public class Uebungsdienst {
         this.uenr = uenr;
     }
 
-    public Long getVerantwortlich() {
+    public Benutzer getVerantwortlich() {
         return verantwortlich;
     }
 
-    public void setVerantwortlich(Long verantwortlich) {
+    public void setVerantwortlich(Benutzer verantwortlich) {
         this.verantwortlich = verantwortlich;
     }
 
@@ -121,22 +123,11 @@ public class Uebungsdienst {
         this.ende = ende;
     }
 
-    public Set<TeilnahmeUebungsdienst> getTeilnahmenUebungsdienst() {
-        return teilnahmenUebungsdienst;
+    public Set<Benutzer> getTeilnehmer() {
+        return teilnehmer;
     }
 
-    public void setTeilnahmenUebungsdienst(Set<TeilnahmeUebungsdienst> teilnahmenUebungsdienst) {
-        this.teilnahmenUebungsdienst = teilnahmenUebungsdienst;
-    }
-
-    // Hilfsmethoden für die Bidirektionalität
-    public void addTeilnahmeUebungsdienst(TeilnahmeUebungsdienst teilnahme) {
-        this.teilnahmenUebungsdienst.add(teilnahme);
-        teilnahme.setUebungsdienst(this);
-    }
-
-    public void removeTeilnahmeUebungsdienst(TeilnahmeUebungsdienst teilnahme) {
-        this.teilnahmenUebungsdienst.remove(teilnahme);
-        teilnahme.setUebungsdienst(null);
+    public void setTeilnehmer(Set<Benutzer> teilnehmer) {
+        this.teilnehmer = teilnehmer;
     }
 }

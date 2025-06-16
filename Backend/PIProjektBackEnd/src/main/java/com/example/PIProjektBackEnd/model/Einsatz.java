@@ -1,6 +1,9 @@
 package com.example.PIProjektBackEnd.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Table(name = "einsatz")
 @Entity
@@ -17,13 +20,21 @@ public class Einsatz {
     private int plz;
     private String ort;
 
-    public Einsatz(boolean e_status, String kategorie, String stichwort, String strasse, int plz, String ort) {
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime alarmzeitpunkt;
+
+    public Einsatz(boolean e_status, String kategorie, String stichwort, String strasse, int plz, String ort, LocalDateTime alarmzeitpunkt) {
         this.e_status = e_status;
         this.kategorie = kategorie;
         this.stichwort = stichwort;
         this.strasse = strasse;
         this.plz = plz;
         this.ort = ort;
+        this.alarmzeitpunkt = alarmzeitpunkt;
+    }
+
+    public Einsatz(){
+
     }
 
     public long getEnr() {
@@ -80,5 +91,13 @@ public class Einsatz {
 
     public void setOrt(String ort) {
         this.ort = ort;
+    }
+
+    public LocalDateTime getAlarmzeitpunkt() {
+        return alarmzeitpunkt;
+    }
+
+    public void setAlarmzeitpunkt(LocalDateTime alarmzeitpunkt) {
+        this.alarmzeitpunkt = alarmzeitpunkt;
     }
 }

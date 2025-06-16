@@ -1,7 +1,10 @@
 package com.example.PIProjektBackEnd.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime; // Import for TIMESTAMP type
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "lehrgang")
@@ -30,20 +33,23 @@ public class Lehrgang {
     @Column(name = "ort")
     private String ort; // varchar(50) -> String
 
-    // --- Constructors ---
-    public Lehrgang() {
-    }
+    @ManyToMany(mappedBy = "lehrgaenge")
+    @JsonBackReference
+    private Set<Benutzer> teilnehmer = new HashSet<>();
 
-    public Lehrgang(String bezeichnung, LocalDateTime start, LocalDateTime ende, String strasse, Integer plz, String ort) {
+    public Lehrgang(String bezeichnung, LocalDateTime start, LocalDateTime ende, String strasse, Integer plz, String ort, Set<Benutzer> teilnehmer) {
         this.bezeichnung = bezeichnung;
         this.start = start;
         this.ende = ende;
         this.strasse = strasse;
         this.plz = plz;
         this.ort = ort;
+        this.teilnehmer = teilnehmer;
     }
 
-    // --- Getter and Setter methods ---
+    public Lehrgang() {
+    }
+
     public Long getLnr() {
         return lnr;
     }
@@ -100,16 +106,12 @@ public class Lehrgang {
         this.ort = ort;
     }
 
-    @Override
-    public String toString() {
-        return "Lehrgang{" +
-                "lnr=" + lnr +
-                ", bezeichnung='" + bezeichnung + '\'' +
-                ", start=" + start +
-                ", ende=" + ende +
-                ", strasse='" + strasse + '\'' +
-                ", plz=" + plz +
-                ", ort='" + ort + '\'' +
-                '}';
+    public Set<Benutzer> getTeilnehmer() {
+        return teilnehmer;
     }
+
+    public void setTeilnehmer(Set<Benutzer> teilnehmer) {
+        this.teilnehmer = teilnehmer;
+    }
+
 }

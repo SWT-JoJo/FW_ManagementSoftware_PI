@@ -1,6 +1,10 @@
 package com.example.PIProjektBackEnd.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "qualifikation")
@@ -11,36 +15,27 @@ public class Qualifikation {
     @Column(name = "qnr")
     private Long qnr; // int AI PK -> Long
 
-    @Column(name = "pnr")
-    private Integer pnr; // int (FK) -> Integer
-
     @Column(name = "bezeichnung")
-    private String bezeichnung; // varchar(50) -> String
+    private String bezeichnung;
 
-    // --- Constructors ---
+    @ManyToMany(mappedBy = "qualifikationen")
+    @JsonBackReference
+    private Set<Benutzer> benutzer = new HashSet<>();
+
+    public Qualifikation(String bezeichnung, Set<Benutzer> benutzer) {
+        this.bezeichnung = bezeichnung;
+        this.benutzer = benutzer;
+    }
+
     public Qualifikation() {
     }
 
-    public Qualifikation(Integer pnr, String bezeichnung) {
-        this.pnr = pnr;
-        this.bezeichnung = bezeichnung;
-    }
-
-    // --- Getter and Setter methods ---
     public Long getQnr() {
         return qnr;
     }
 
     public void setQnr(Long qnr) {
         this.qnr = qnr;
-    }
-
-    public Integer getPnr() {
-        return pnr;
-    }
-
-    public void setPnr(Integer pnr) {
-        this.pnr = pnr;
     }
 
     public String getBezeichnung() {
@@ -51,12 +46,11 @@ public class Qualifikation {
         this.bezeichnung = bezeichnung;
     }
 
-    @Override
-    public String toString() {
-        return "Qualifikation{" +
-                "qnr=" + qnr +
-                ", pnr=" + pnr +
-                ", bezeichnung='" + bezeichnung + '\'' +
-                '}';
+    public Set<Benutzer> getBenutzer() {
+        return benutzer;
+    }
+
+    public void setBenutzer(Set<Benutzer> benutzer) {
+        this.benutzer = benutzer;
     }
 }

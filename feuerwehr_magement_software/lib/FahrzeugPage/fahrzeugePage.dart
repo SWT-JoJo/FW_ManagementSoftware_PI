@@ -1,73 +1,49 @@
 import 'package:flutter/material.dart';
-
 import '../shared/Appbar.dart';
 import '../shared/navigationBar.dart';
+import '../services/databaseRequestor.dart'; // Datei importieren
 
-class Fahrzeugepage extends StatelessWidget {
-  // Die Liste der Fahrzeugdaten ist hier definiert.
-  static const List<Map<String, dynamic>> fwFahrzeugCardDemo = [
-    {
-      'status': 1,
-      'funkname': 'Florian Eltville 1/46-1',
-      'bezeichnung': 'LF 20'
-    },
-    {
-      'status': 2,
-      'funkname': 'Florian Eltville 1/19-1',
-      'bezeichnung': 'ELW 1'
-    },
-    {
-      'status': 3,
-      'funkname': 'Florian Eltville 1/23-1',
-      'bezeichnung': 'TLF 16/25'
-    },
-    {
-      'status': 4,
-      'funkname': 'Florian Eltville 1/59-1',
-      'bezeichnung': 'RW 1'
-    },
-    {
-      'status': 6,
-      'funkname': 'Florian Eltville 1/10-1',
-      'bezeichnung': 'MTF'
-    },
-    {
-      'status': 1,
-      'funkname': 'Florian Kiedrich 1/46-1',
-      'bezeichnung': 'LF 10'
-    },
-    {
-      'status': 2,
-      'funkname': 'Florian Erbach 1/44-1',
-      'bezeichnung': 'HLF 20'
-    },
-    {
-      'status': 3,
-      'funkname': 'Florian Hattenheim 1/65-1',
-      'bezeichnung': 'GW-L2'
-    },
-    {
-      'status': 4,
-      'funkname': 'Florian Martinsthal 1/17-1',
-      'bezeichnung': 'TSF-W'
-    },
-    {
-      'status': 6,
-      'funkname': 'Florian Rauenthal 1/11-1',
-      'bezeichnung': 'MLF'
-    },
-  ];
-
+class Fahrzeugepage extends StatefulWidget {
   const Fahrzeugepage({super.key});
+
+  @override
+  State<Fahrzeugepage> createState() => _FahrzeugepageState();
+}
+
+class _FahrzeugepageState extends State<Fahrzeugepage> {
+  List<dynamic> fahrzeuge = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    loadFahrzeuge();
+  }
+
+  Future<void> loadFahrzeuge() async {
+    try {
+      final data = await databaseRequestor().getFahrzeuge();
+      setState(() {
+        fahrzeuge = data;
+        isLoading = false;
+      });
+    } catch (e) {
+      print('Fehler beim Laden der Fahrzeugdaten: $e');
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appAppBar(),
-
-      body: Column(
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Column(
         children: [
-          SizedBox(height: 15,),
+          const SizedBox(height: 15),
           Center(
             child: Text(
               "Fahrzeuge",
@@ -78,33 +54,27 @@ class Fahrzeugepage extends StatelessWidget {
               ),
             ),
           ),
-
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(8),
-              // Set itemCount to the length of your data list
-              itemCount: fwFahrzeugCardDemo.length,
-              itemBuilder: (BuildContext context, int index) {
-                // Get the current vehicle's data map
-                final Map<String, dynamic> fahrzeugData = fwFahrzeugCardDemo[index];
-
-                // Pass the specific data points to fahrzeugCard
+              itemCount: fahrzeuge.length,
+              itemBuilder: (context, index) {
+                final fahrzeug = fahrzeuge[index];
                 return fahrzeugCard(
-                  // Access values from the map using their keys
-                  statusInt: fahrzeugData['status'] as int,
-                  funkName: fahrzeugData['funkname'] as String,
-                  typ: fahrzeugData['bezeichnung'] as String,
+                  statusInt: fahrzeug['status'],
+                  funkName: fahrzeug['funkbez'],
+                  typ: fahrzeug['bezeichnung'],
                 );
               },
             ),
           ),
         ],
       ),
-
       bottomNavigationBar: navBar(),
     );
   }
 }
+
 
 
 //Cards Templates
@@ -116,10 +86,12 @@ class fahrzeugCard extends StatelessWidget {
 
   static const Map<int, Color> statusColors = {
     1: Colors.green,
-    2: Colors.lightGreen,
+    2: Colors.lightGreenAccent,
     3: Colors.yellow,
     4: Colors.red,
+    5: Colors.lightBlueAccent,
     6: Colors.black,
+    0: Colors.blue,
   };
 
 
