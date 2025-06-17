@@ -1,0 +1,10 @@
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/CMakeFiles/INSTALL.dir
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/CMakeFiles/ALL_BUILD.dir
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/CMakeFiles/ZERO_CHECK.dir
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/flutter/CMakeFiles/flutter_wrapper_app.dir
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/flutter/CMakeFiles/flutter_assemble.dir
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/flutter/CMakeFiles/INSTALL.dir
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/CMakeFiles/feuerwehr_magement_software.dir
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/CMakeFiles/INSTALL.dir
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/CMakeFiles/ALL_BUILD.dir

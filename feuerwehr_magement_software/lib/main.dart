@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/einsätze':
-            return _createInstantRoute(const einsatzePage());
+            return _createInstantRoute(const EinsatzePage());
           case '/fahrzeuge':
             return _createInstantRoute(const Fahrzeugepage());
           case '/home':

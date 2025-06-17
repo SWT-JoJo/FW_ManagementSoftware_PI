@@ -1,0 +1,11 @@
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/data/icudtl.dat
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/flutter_windows.dll
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.bin
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.json
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/data/flutter_assets/FontManifest.json
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/data/flutter_assets/kernel_blob.bin
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/data/flutter_assets/NativeAssetsManifest.json
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/data/flutter_assets/NOTICES.Z
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+D:/Dev/FW_ManagementSoftware_PI/feuerwehr_magement_software/build/windows/x64/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag
