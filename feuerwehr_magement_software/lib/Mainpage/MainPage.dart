@@ -24,11 +24,9 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
 
-    // Erstes Laden
     UpdateLetzenEinsaetze();
     UpdateUebungsdienste();
 
-    // Alle 30 Sekunden neu laden
     _timer = Timer.periodic(const Duration(seconds: 30), (timer) {
       UpdateLetzenEinsaetze();
       UpdateUebungsdienste();
@@ -41,40 +39,41 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
+  IconData _getEinsatzIcon(String? kategorie) {
+    switch (kategorie?.toLowerCase()) {
+      case 'feuer':
+        return Icons.local_fire_department;
+      case 'thvu':
+        return Icons.car_crash;
+      case 'th':
+        return Icons.build;
+      default:
+        return Icons.notifications_active;
+    }
+  }
+
   void UpdateLetzenEinsaetze() async {
     try {
       final daten = await _requestor.getEinsaetze();
 
-      daten.sort((a, b) =>
-      DateTime.tryParse(b['datum'] ?? '')?.compareTo(DateTime.tryParse(a['datum'] ?? '') ?? DateTime(1970)) ?? 0);
-
+      daten.sort((a, b) => b['enr'].compareTo(a['enr'])); // Absteigend nach Einsatznummer
       final letzte5 = daten.take(5).toList();
 
       setState(() {
-        letzenEinsaetze = letzte5.map((eintrag) {
-          final datum = DateTime.tryParse(eintrag['datum'] ?? '') ?? DateTime(1970);
-          final formatiert =
-              "${datum.day.toString().padLeft(2, '0')}.${datum.month.toString().padLeft(2, '0')}.${datum.year} ${datum.hour.toString().padLeft(2, '0')}:${datum.minute.toString().padLeft(2, '0')}";
-
-          Color farbe;
-          switch ((eintrag['status'] as String?)?.toLowerCase()) {
-            case 'laufend':
-              farbe = Colors.redAccent;
-              break;
-            case 'beendet':
-              farbe = Colors.green;
-              break;
-            default:
-              farbe = Colors.grey;
-          }
+        letzenEinsaetze = letzte5.map((einsatz) {
+          final kategorie = einsatz['kategorie'] ?? '';
+          final datumUhrzeit = einsatz['alarmzeitpunkt'] ?? '–';
+          final adresse = "${einsatz['strasse']}, ${einsatz['plz']} ${einsatz['ort']}";
+          final status = einsatz['e_status'] == true ? "laufend" : "beendet";
+          final statusColor = einsatz['e_status'] == true ? Colors.redAccent : Colors.greenAccent;
 
           return LetzterEinsatzCard(
-            icon: Icons.fire_truck,
-            stichwort: eintrag['stichwort'] ?? "Unbekannt",
-            datumUhrzeit: formatiert,
-            adresse: eintrag['adresse'] ?? "–",
-            status: eintrag['status'] ?? "unbekannt",
-            statusColor: farbe,
+            stichwort: einsatz['stichwort'] ?? '',
+            datumUhrzeit: datumUhrzeit,
+            adresse: adresse,
+            status: status,
+            icon: _getEinsatzIcon(kategorie),
+            statusColor: statusColor,
           );
         }).toList();
       });
@@ -87,14 +86,12 @@ class _MainPageState extends State<MainPage> {
     try {
       final daten = await _requestor.getUebungsdienste();
 
-      // Sortiere nach Startzeit (aufsteigend)
       daten.sort((a, b) {
         DateTime dA = DateTime.tryParse(a['start'] ?? '') ?? DateTime(2100);
         DateTime dB = DateTime.tryParse(b['start'] ?? '') ?? DateTime(2100);
         return dA.compareTo(dB);
       });
 
-      // Filtere nur zukünftige Termine (start >= jetzt) und nehme max. 5
       final kommende5 = daten.where((eintrag) {
         final start = DateTime.tryParse(eintrag['start'] ?? '');
         if (start == null) return false;
@@ -108,7 +105,6 @@ class _MainPageState extends State<MainPage> {
 
           final uhrStart = TimeOfDay(hour: start.hour, minute: start.minute);
           final uhrEnde = TimeOfDay(hour: ende.hour, minute: ende.minute);
-
           final datum = "${start.day.toString().padLeft(2, '0')}.${start.month.toString().padLeft(2, '0')}.${start.year}";
 
           return termineWidget(
@@ -139,18 +135,20 @@ class _MainPageState extends State<MainPage> {
           children: [
             const SizedBox(height: 25),
 
-            // Einsätze
+            // Letzte Einsätze
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    "Letzte Einsätze",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.red[800],
-                      fontWeight: FontWeight.bold,
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      "Letzte Einsätze",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.red[800],
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -160,7 +158,7 @@ class _MainPageState extends State<MainPage> {
 
             const SizedBox(height: 15),
 
-            // Übungsdienste / Termine
+            // Übungsdienste
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -193,7 +191,7 @@ class _MainPageState extends State<MainPage> {
             const SizedBox(height: 20),
 
             // Lehrgänge (Platzhalter)
-            Column(
+           /* Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -213,7 +211,7 @@ class _MainPageState extends State<MainPage> {
                   children: const [],
                 ),
               ],
-            ),
+            ),*/
           ],
         ),
       ),
