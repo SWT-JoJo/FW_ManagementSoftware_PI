@@ -3,8 +3,8 @@ import 'dart:convert';
 
 
 class databaseRequestor{
-//  static const String url = "http://10.5.241.156:8080"; //Schule
-  static const String url = "http://192.168.178.35:8080"; //Home
+  static const String url = "http://10.5.241.156:8080"; //Schule
+ // static const String url = "http://192.168.178.35:8080"; //Home
 
 
   //Fahrzeugdaten holen
