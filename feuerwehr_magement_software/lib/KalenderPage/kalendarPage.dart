@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:feuerwehr_magement_software/shared/TermineCard.dart';
 import 'package:http/http.dart' as http; // Importiere http-Paket
-import 'dart:convert'; // Importiere dart:convert für JSON-Dekodierung
+import 'dart:convert';
+
+import '../services/databaseRequestor.dart'; // Importiere dart:convert für JSON-Dekodierung
 
 // Definiere die URL für deine Backend-API
 // Ersetze 'http://your-backend-ip:port' durch die tatsächliche IP-Adresse und den Port deines Spring Boot Backends
@@ -37,13 +39,13 @@ class _kalendarPageState extends State<kalendarPage> {
   // Methode zum Laden der Übungsdienste für den ausgewählten Tag
   Future<void> _fetchUebungsdiensteForSelectedDay() async {
     setState(() {
-      _isLoading = true; // Setze Ladezustand auf true
-      _errorMessage = null; // Setze Fehlermeldung zurück
-      _uebungsdienste = []; // Leere alte Daten
+      _isLoading = true;
+      _errorMessage = null;
+      _uebungsdienste = [];
     });
 
     try {
-      final List<dynamic> data = await getUebungsdiensteAm(kalendarPage.selectedDay);
+      final data = await databaseRequestor().getUebungsdiensteAm(kalendarPage.selectedDay);
       setState(() {
         _uebungsdienste = data;
         _isLoading = false;
@@ -56,6 +58,7 @@ class _kalendarPageState extends State<kalendarPage> {
       });
     }
   }
+
 
   // Deine bestehende Methode zum Abrufen der Übungsdienste von der API
   Future<List<dynamic>> getUebungsdiensteAm(DateTime date) async {
@@ -199,7 +202,7 @@ class _kalendarPageState extends State<kalendarPage> {
                             uhrstart: TimeOfDay.fromDateTime(startTime),
                             uhrende: TimeOfDay.fromDateTime(endTime),
                             verantwortlicher: verantwortlicherName ?? 'ID: ${termin['verantwortlich']}', // Zeige ID, da Name fehlt
-                            abteilung: abteilungName ?? 'Abteilung nicht spezifiziert', // Platzhalter
+                            abteilung: abteilungName ?? 'Unbekannte Abteilung', // Platzhalter
                             color: Colors.blueAccent, // Du könntest die Farbe basierend auf dem Typ des Termins anpassen
                             plz: termin['plz']?.toString() ?? 'N/A',
                             Ort: termin['ort'] ?? 'N/A',
